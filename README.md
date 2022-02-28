@@ -63,7 +63,7 @@ $ python bp.py ../benchmarks/CIS_RedHat_OpenShift_Container_Platform_v4_Benchmar
 
 The following is a list of acknowledged gaps in the current design:
 
-- HTLM formatting in the PDF is not perserved
+- HTML formatting in the PDF is not preserved
 - Parsing currently assumes a required property order (e.g., Description must
   come before Rationale)
 - The `Control` object isn't available via a package, this may change in the
