@@ -52,7 +52,7 @@ class Control(dict):
             return self._remove_duplicate_spaces(value)
 
     def _parse_impact(self):
-        pattern = re.compile(r"Impact:\s[\s\w\W]*(?=Audit:)")
+        pattern = re.compile(r'Impact:\s[\s\w\W]*?(?=Audit:)')
         m = pattern.search(self._raw)
         if m:
             value = self._remove_newlines(m[0])
