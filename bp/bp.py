@@ -85,7 +85,7 @@ class Control(dict):
             return m[0].lstrip().rstrip()
 
     def _parse_audit(self):
-        pattern = re.compile(r'Audit:[\w \W \d \s()]*(?=Remediation:)')
+        pattern = re.compile(r'Audit:[\w \W \d \s()]*?(?=Remediation:)')
         m = pattern.search(self._raw)
         if m:
             value = m[0]
@@ -95,7 +95,7 @@ class Control(dict):
             return value
 
     def _parse_remediation(self):
-        pattern = re.compile(r'Remediation:[\w \W \d \s]*(?=Default\sValue:)')
+        pattern = re.compile(r'Remediation:[\w \W \d \s]*?(?=Default\sValue:)')
         m = pattern.search(self._raw)
         if m:
             value = self._remove_page_numbers(m[0])
@@ -103,7 +103,7 @@ class Control(dict):
             return value.rstrip().lstrip('Remediation: \n')
 
     def _parse_references(self):
-        pattern = re.compile(r'References:[\w \W \d \s]*(?=CIS\sControls:)')
+        pattern = re.compile(r'References:[\w \W \d \s]*?(?=CIS\sControls:)')
         m = pattern.search(self._raw)
         if m:
             value = self._remove_form_feed(m[0])
@@ -111,7 +111,7 @@ class Control(dict):
             return value.rstrip().lstrip('References: \n')
 
     def _parse_default(self):
-        pattern = re.compile(r'Default\sValue:[\w \W \d \s]*(?=References:)')
+        pattern = re.compile(r'Default\sValue:[\w \W \d \s]*?(?=References:)')
         m = pattern.search(self._raw)
         if m:
             value = self._remove_newlines(m[0])
@@ -168,7 +168,6 @@ def to_dict(raw_text):
     # This pattern attempts to match the control title, which usually starts
     # with integers and some text that uniquely identifies the control.
     pattern = re.compile(r'(?!.*\.{2})\d*\.\d*\.\d+ [\w :()-./]*\n')
-    match = pattern.search(raw_text)
 
     # Save the benchmark in a dictionary, where the key is the control section
     # (e.g., 1.1.1, 5.2.10) and the value is the corresponding Match object,
