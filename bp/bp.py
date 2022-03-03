@@ -210,22 +210,11 @@ if __name__ == "__main__":
         'benchmark', type=str,
         help='File path to benchmark in PDF format'
     )
-    parser.add_argument(
-        '-c', '--control', type=str,
-        help='Control ID to parse and print to stdout in YAML (e.g, 1.1.2).'
-    )
 
     args = parser.parse_args()
     raw = convert_pdf(args.benchmark)
     controls = to_dict(raw)
-    # This is a rudimentary example showing the details of a specific control,
-    # if supplied. This CLI needs to be worked out depending on how or if this
-    # is actually used for something.
-    if args.control:
-        if args.control in controls.keys():
-            print(json.dumps(controls[args.control].__dict__()))
-    else:
-        output = []
-        for section, control in controls.items():
-            output.append(control.__dict__())
-        print(json.dumps(output))
+    output = []
+    for section, control in controls.items():
+        output.append(control.__dict__())
+    print(json.dumps(output))
